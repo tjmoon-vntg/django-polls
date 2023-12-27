@@ -1,12 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
 {% load static %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" /> {% endcomment %}
 
 {% if user.username %}
-<p>{{ user.username}}</p>
-{% else %}
-<p>user 로그인 필요</p>
-{% endif%}
+{% comment %} <p>username : {{ user.username}}</p> {% endcomment %}
 
 <p>{% if latest_question_list %}</p>
 
@@ -23,3 +23,18 @@
 <p>No polls are available.</p>
 {% endif %}
 <p></p>
+
+
+{% else %}
+<p>user 로그인 필요</p>
+<a href={% url 'polls:login' %}>login</a>
+{% endif%}
+
+
+
+{% comment %} {% if user.username %}
+<a href={% url 'polls:logout' %}>logout</a>
+{% endif%} {% endcomment %}
+
+
+{% endblock %}

@@ -1,8 +1,7 @@
-login text
+{% extends "base.html" %} {% block content %} login
 <p></p>
-  <form action="{% url 'polls:login' %}" method="post">
-    {% csrf_token %} 
-    {{form.as_p}}
-    <input type="submit" value="login" />
-  </form>
+<form action="{% url 'polls:login' %}" method="post">
+  {% csrf_token %} {{form.as_p}}
+  <input type="submit" value="login" />
 </form>
+{% endblock %}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>test</title>
+  </head>
+
+  <body>
+    {% comment %} <h1>여기는 base.html!</h1> {% endcomment %}
+    {% if user.username %}
+<p>username : {{ user.username}}</p>
+{% endif%}
+    {% block content %} {% endblock %}
+    <p></p>
+
+<a href={% url 'polls:index' %}>[Home]</a>
+{% if user.username %}
+<a href={% url 'polls:logout' %}>[logout]</a>
+{% endif%}
+
+  </body>
+</html>

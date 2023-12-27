@@ -55,6 +55,7 @@ def vote(request, question_id):
 
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
 
 
 def login(request):
@@ -69,3 +70,7 @@ def login(request):
         'form': form
     }
     return render(request, 'polls/login.html', context)
+
+def logout(request):
+    auth_logout(request)
+    return redirect('polls:index')
