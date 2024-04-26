@@ -52,11 +52,10 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
 
-
+### login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
-
 
 def login(request):
     if request.method == 'POST':
@@ -74,3 +73,63 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return redirect('polls:index')
+
+
+### rest api
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import Http404, HttpResponse, HttpResponseRedirect
+from rest_framework.views import APIView
+from rest_framework.response import Response
+#from rest_framework import status
+#from .models import Question, Choice
+
+
+from rest_framework import viewsets
+
+from .serializers import QuestionSerializer, ChoiceSerializer
+
+#from django.views import generic
+
+## request api and get json back
+
+# class ApiIndexView(APIView):
+#     def get(self, request):
+#         q1 = Question.objects.all()
+#         serializer = QuestionSerializer(q1, many=True)
+#         return Response(serializer.data)
+    
+#     def post(self):
+#         pass
+
+# viewsets
+class ApiIndexView(viewsets.ModelViewSet):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+    # def get(self, request):
+    #     q1 = Question.objects.all()
+    #     serializer = QuestionSerializer(q1, many=True)
+    #     return Response(serializer.data)
+    
+    # def post(self):
+    #     pass
+
+# class questionList(APIView):
+#     def get(self, request):
+#         q1 = Questions.objects.all()
+#         serializer = QuestionSerializer(q1, many=True)
+#         return Response(serializer.data)
+    
+#     def post(self):
+#         pass
+    
+    
+# class choiceList(APIView):
+#     def get(self, request):
+#         c1 = Choice.objects.all()
+#         serializer = ChoiceSerializer(c1, many=True)
+#         return Response(serializer.data)
+    
+#     def post(self):
+#         pass
+    
+    
